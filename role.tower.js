@@ -9,14 +9,16 @@ module.exports = {
                     return(road.hits < road.hitsMax); 
                 }
             });
-            if(damage.carryCapacity > 50){
-                tower.forEach((tow) =>tow.repair(damage[0]));
-            }
+         
             var enemy = Game.rooms[name].find(FIND_HOSTILE_CREEPS);
             if(enemy){
                 tower.forEach((tow) =>tow.attack(enemy[0]));
             }
+            
+             if(damage.carryCapacity > 50 && !enemy){
+                tower.forEach((tow) =>tow.repair(damage[0]));
+            }
+            
           }
-        
    } 
 };

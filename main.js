@@ -6,6 +6,8 @@ var creepCreator = require('creep.creator');
 
 module.exports.loop = function () {
     
+      Game.spawns['Spawn1'].room.controller.activateSafeMode();
+         
         creepCreator.run();
     
         for(var name in Game.rooms){
