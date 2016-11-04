@@ -2,6 +2,14 @@ module.exports = {
  
  run: function(creep){
      
+      var closestStorage = creep.pos.findClosestByPath(FIND_STRUCTURES,{
+         filter:(structure) => {
+                  return(structure.structureType == STRUCTURE_STORAGE
+                         || structure.structureType == STRUCTURE_CONTAINER)
+                         && structure.store[RESOURCE_ENERGY] > 0;
+                   }
+                         });
+     
      if(creep.memory.carrying && creep.carry.energy == 0){
         creep.memory.carrying = false;
         creep.say('looking');
@@ -45,7 +53,9 @@ module.exports = {
       
      }
      else {
-           creep.moveTo(Game.flags.WaitingFlag);
+           if(creep.harvest(closestStorage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
+               creep.moveTo(closestStorage);
+           }
        }
    }
 };

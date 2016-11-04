@@ -6,10 +6,12 @@ module.exports = {
               return( structure.structureType == STRUCTURE_EXTENSION
                    || structure.structureType == STRUCTURE_SPAWN
                    || structure.structureType == STRUCTURE_TOWER)
+                   && structure.hits < structure.hitsMax;
           }
       });
-      if(myDamagedStructures.hits < myDamagedStructures.hitsMax){
-          Game.spawns['Spawn1'].room.controller.activateSafeMode();
+      
+      if(myDamagedStructures){
+          creep.room.controller.activateSafeMode();
       }
   }
 };

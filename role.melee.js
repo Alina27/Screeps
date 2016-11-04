@@ -2,7 +2,19 @@ module.exports = {
 
    run: function(creep){
        
-       if(creep.memory.meleeing && creep.carry.energy == 0){
+       //looking for closest hostile
+       //if such was found then attacks it
+       //othervise just waiting newr flag
+       var enemy = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
+       if(enemy){
+           creep.attack(enemy);
+       }
+        else{
+              creep.moveTo(Game.flags.MeleeFlag);
+          }
+       
+       
+      /* if(creep.memory.meleeing && creep.carry.energy == 0){
            creep.memory.meleeing = false;
            creep.say('harvesting');
        }
@@ -26,6 +38,6 @@ module.exports = {
            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[1]);
             }
-       }
+       }*/
    }
 };
